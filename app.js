@@ -1,11 +1,11 @@
 const tglInput = document.getElementById("tglInput");
 const jamInput = document.getElementById("jamInput");
-const pilihan = document.getElementById("pilihan");
+const pilihanFilter = document.getElementById("pilihanFilter");
 
 const tambah = () => {
   const tgl = tglInput.value;
   const jam = jamInput.value;
-  const pil = pilihan.value;
+  const pil = pilihanFilter.value;
 
   const data = document.createElement("div");
 
@@ -63,19 +63,33 @@ window.addEventListener("load", () => {
 });
 
 const filterTanggal = () => {
-  const tglFilter = document.getElementById("tglFilter").value;
-  let scheduleArray = JSON.parse(localStorage.getItem("scheduleArray"));
-  const filteredSchedules = scheduleArray.filter((schedule) => schedule.tgl === tglFilter);
+  const tgl = tglFilter.value;
 
-  // Remove existing schedule elements
-  const existingSchedules = document.querySelectorAll(".list div");
-  existingSchedules.forEach((element) => element.remove());
+  let filteredData = [];
+  if (localStorage.getItem("scheduleArray")) {
+    const scheduleArray = JSON.parse(localStorage.getItem("scheduleArray"));
+    filteredData = scheduleArray.filter((schedule) => {
+      return schedule.tgl.includes(tgl);
+    });
+  }
 
-  filteredSchedules.forEach((schedule, index) => {
+  const dataContainer = document.querySelector(".list");
+  dataContainer.innerHTML = "";
+  if (filteredData.length === 0) {
+    dataContainer.innerHTML = `<button type="button" class="btn btn-warning btn-sm" onclick="kembali()">Kembali</button> <p class='text-center'>Sepertinya Kamu tidak masuk PKL...</p>`;
+    return;
+  }
+
+  dataContainer.innerHTML = `
+  <button type="button" class="btn btn-warning btn-sm" onclick="kembali()">Kembali</button> 
+  
+  
+  `;
+
+  filteredData.forEach((schedule, index) => {
     const data = document.createElement("div");
-    data.innerHTML = `<p class="mt-3">${schedule.pil}</p > <ul class="list-group mt-3"> <li class="list-group-item card-box">${schedule.tgl} <br> ${schedule.jam}</li> </ul> <button type="button" class="btn btn-danger btn-sm mt-2" onclick="removeSchedule(${index})">Hapus</button>`;
-    var datas = document.querySelector(".list");
-    datas.appendChild(data);
+    data.innerHTML = `<p class="mt-3">${schedule.pil}</p > <ul class="list-group mt-3"> <li class="list-group-item card-box">${schedule.tgl} <br> ${schedule.jam}</li> </ul> `;
+    dataContainer.appendChild(data);
   });
 };
 
@@ -88,3 +102,7 @@ if (toastTrigger) {
     toast.show();
   });
 }
+
+const kembali = () => {
+  window.location.reload();
+};
