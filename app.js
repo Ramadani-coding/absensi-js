@@ -1,11 +1,13 @@
 const tglInput = document.getElementById("tglInput");
 const jamInput = document.getElementById("jamInput");
 const pilihanFilter = document.getElementById("pilihanFilter");
+const keterangan = document.getElementById("keterangan");
 
 const tambah = () => {
   const tgl = tglInput.value;
   const jam = jamInput.value;
   const pil = pilihanFilter.value;
+  const ket = keterangan.value;
 
   const data = document.createElement("div");
 
@@ -13,7 +15,7 @@ const tambah = () => {
   
   <p class="mt-3">${pil}</p>
     <ul class="list-group mt-3 ">
-        <li class="list-group-item card-box"> ${tgl} <br> ${jam}</li>
+        <li class="list-group-item card-box"> ${tgl} <br> ${jam} <br> ${ket}</li>
     </ul>
     <button type="button" class="btn btn-danger btn-sm mt-2" >Hapus</button>
   
@@ -36,6 +38,7 @@ const tambah = () => {
     tgl: tgl,
     jam: jam,
     pil: pil,
+    ket: ket,
   });
 
   localStorage.setItem("scheduleArray", JSON.stringify(scheduleArray));
@@ -55,7 +58,7 @@ window.addEventListener("load", () => {
     const scheduleArray = JSON.parse(localStorage.getItem("scheduleArray"));
     scheduleArray.forEach((schedule, index) => {
       const data = document.createElement("div");
-      data.innerHTML = `<p class="mt-3">${schedule.pil}</p > <ul class="list-group mt-3"> <li class="list-group-item card-box">${schedule.tgl} <br> ${schedule.jam}</li> </ul> <button type="button" class="btn btn-danger btn-sm mt-2" onclick="removeSchedule(${index})">Hapus</button>`;
+      data.innerHTML = `<p class="mt-3">${schedule.pil}</p > <ul class="list-group mt-3"> <li class="list-group-item card-box">${schedule.tgl} <br> ${schedule.ket} <br> ${schedule.jam}</li> </ul> <button type="button" class="btn btn-danger btn-sm mt-2" onclick="removeSchedule(${index})">Hapus</button>`;
       var datas = document.querySelector(".list");
       datas.appendChild(data);
     });
@@ -88,7 +91,7 @@ const filterTanggal = () => {
 
   filteredData.forEach((schedule, index) => {
     const data = document.createElement("div");
-    data.innerHTML = `<p class="mt-3">${schedule.pil}</p > <ul class="list-group mt-3"> <li class="list-group-item card-box">${schedule.tgl} <br> ${schedule.jam}</li> </ul> `;
+    data.innerHTML = `<p class="mt-3">${schedule.pil}</p > <ul class="list-group mt-3"> <li class="list-group-item card-box">${schedule.tgl} <br> ${schedule.ket} <br>  ${schedule.jam}</li> </ul> `;
     dataContainer.appendChild(data);
   });
 };
