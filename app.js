@@ -61,3 +61,30 @@ window.addEventListener("load", () => {
     });
   }
 });
+
+const filterTanggal = () => {
+  const tglFilter = document.getElementById("tglFilter").value;
+  let scheduleArray = JSON.parse(localStorage.getItem("scheduleArray"));
+  const filteredSchedules = scheduleArray.filter((schedule) => schedule.tgl === tglFilter);
+
+  // Remove existing schedule elements
+  const existingSchedules = document.querySelectorAll(".list div");
+  existingSchedules.forEach((element) => element.remove());
+
+  filteredSchedules.forEach((schedule, index) => {
+    const data = document.createElement("div");
+    data.innerHTML = `<p class="mt-3">${schedule.pil}</p > <ul class="list-group mt-3"> <li class="list-group-item card-box">${schedule.tgl} <br> ${schedule.jam}</li> </ul> <button type="button" class="btn btn-danger btn-sm mt-2" onclick="removeSchedule(${index})">Hapus</button>`;
+    var datas = document.querySelector(".list");
+    datas.appendChild(data);
+  });
+};
+
+const toastTrigger = document.getElementById("liveToastBtn");
+const toastLiveExample = document.getElementById("liveToast");
+if (toastTrigger) {
+  toastTrigger.addEventListener("click", () => {
+    const toast = new bootstrap.Toast(toastLiveExample);
+
+    toast.show();
+  });
+}

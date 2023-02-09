@@ -1,0 +1,25 @@
+.utama {
+  height: 100%;
+  background-color: #2c6975;
+}
+
+.title {
+  color: #edecde;
+}
+
+.about {
+  color: #fff;
+}
+
+.card-box {
+  background-color: #dddd;
+}
+
+.pemberitahuan {
+  width: 30px;
+  padding: 5px;
+}
+
+.tombol {
+  color: black;
+}

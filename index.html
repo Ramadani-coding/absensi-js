@@ -5,42 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>ABSENSI || PKL</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous" />
-
-    <link rel="shortcut icon" href="Smk3.png" type="image/x-icon" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="imgs/Smk3.png" type="image/x-icon" />
   </head>
-  <style>
-    .utama {
-      height: 100%;
-      background-color: #2c6975;
-    }
-
-    .title {
-      color: #edecde;
-    }
-
-    .about {
-      color: #fff;
-    }
-
-    .card-box {
-      background-color: #dddd;
-    }
-  </style>
   <body>
     <section class="utama">
       <div>
         <div class="p-3 text-center">
-          <h1 class="title">ABSENSI PKL</h1>
-          <p class="about">9 Januari - 8 Mei</p>
+          <h1 class="title">ABSENSI PKL SMKN 3 BANJARBARU</h1>
+          <p class="about">9 Januari - 8 Mei 2023</p>
+
+          <button type="button" class="btn btn-warning btn-sm tombol" id="liveToastBtn">PENCET AKU!!!</button>
+
+          <div class="toast-container position-fixed bottom-0 end-0 p-3">
+            <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+              <div class="toast-header">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-2 h-2 pemberitahuan">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M10.34 15.84c-.688-.06-1.386-.09-2.09-.09H7.5a4.5 4.5 0 110-9h.75c.704 0 1.402-.03 2.09-.09m0 9.18c.253.962.584 1.892.985 2.783.247.55.06 1.21-.463 1.511l-.657.38c-.551.318-1.26.117-1.527-.461a20.845 20.845 0 01-1.44-4.282m3.102.069a18.03 18.03 0 01-.59-4.59c0-1.586.205-3.124.59-4.59m0 9.18a23.848 23.848 0 018.835 2.535M10.34 6.66a23.847 23.847 0 008.835-2.535m0 0A23.74 23.74 0 0018.795 3m.38 1.125a23.91 23.91 0 011.014 5.395m-1.014 8.855c-.118.38-.245.754-.38 1.125m.38-1.125a23.91 23.91 0 001.014-5.395m0-3.46c.495.413.811 1.035.811 1.73 0 .695-.316 1.317-.811 1.73m0-3.46a24.347 24.347 0 010 3.46"
+                  />
+                </svg>
+
+                <strong class="me-auto">Pemberitahuan</strong>
+
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+              </div>
+              <div class="toast-body">
+                Website ABSENSI saya kembangkan masih dalam tahap beta dan masih memiliki banyak kekurangan, seperti data yang disimpan tidak menggunkan database, tidak multi user, dan masih banyak bug yang harus diterima dan diperbaiki
+                dalam waktu dekat. Atas perhatiannya saya ucapkan terimaksih...
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="p-2 d-flex justify-content-center">
           <div class="card card-box" style="width: 40rem">
             <div class="card-body list">
-              <h5 class="card-title text-center pb-4">Jam Masuk & Pulang</h5>
+              <h5 class="card-title text-center pb-4">Jam Datang & Pulang</h5>
               <div class="input-group input-group-sm mb-3 card-box">
                 <select class="form-select card-box" aria-label="Default select example" id="pilihan" required>
-                  <option selected>Pilihan</option>
+                  <option disabled selected>Pilihan</option>
                   <option value="Datang">Datang</option>
                   <option value="Pulang">Pulang</option>
                 </select>
@@ -54,7 +60,16 @@
                 <input type="time" class="form-control card-box" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" id="jamInput" required />
               </div>
 
+              <div class="list div">
+                <p>Filter</p>
+                <div class="input-group input-group-sm mb-3">
+                  <span class="input-group-text" id="inputGroup-sizing-sm">Filter</span>
+                  <input type="date" class="form-control card-box" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" id="tglFilter" required />
+                </div>
+              </div>
+
               <button type="button" class="btn btn-success btn-sm" onclick="tambah()">Absen</button>
+              <button type="button" class="btn btn-warning btn-sm" onclick="filterTanggal()">Filter</button>
             </div>
           </div>
         </div>
